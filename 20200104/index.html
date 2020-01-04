@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+
+  /**
+   * 回调函数
+   * 如果需要浏览器下次重绘前继续下一帧动画
+   * 此回调函数需要调用 requestAnimationFrame()
+   * @param e 回调函数默认的参数，动画执行的时间戳
+   */
+  function move (timestamp) {
+    console.log('move', timestamp);
+    requestAnimationFrame(move);
+  }
+
+  // 执行这个函数启动动画，第一个时间戳是 undefined
+  // move();
+
+  // 使用此函数执行启动动画较好
+  // 返回一个非零值，没有具体意义。是动画回调的标识
+  // 返回值可以用来取消回调函数
+  var animation = requestAnimationFrame(move);
+
+  // 可以取消回调动画回调函数执行，兼容性较差
+  // 立刻执行，函数一次都位执行。回调函数是否是异步？
+  // cancelAnimationFrame(animation);
+
+  // 取消动画函数执行，执行条件判断具体方式？
+  // 比如：回调函数执行 5s 后停止回调函数执行
+    /*if(timestamp > 5000) {
+      console.log('> 5000');
+    }*/
+
+</script>
+</body>
+</html>
