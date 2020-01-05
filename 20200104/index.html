@@ -15,7 +15,12 @@
    */
   function move (timestamp) {
     console.log('move', timestamp);
-    requestAnimationFrame(move);
+
+    // 判断到调降执行，不是到条件停止.
+    // 满足条件才会执行回调函数。
+    if (timestamp < 5000) {
+      requestAnimationFrame(move);
+    }
   }
 
   // 执行这个函数启动动画，第一个时间戳是 undefined
@@ -35,6 +40,8 @@
     /*if(timestamp > 5000) {
       console.log('> 5000');
     }*/
+
+
 
 </script>
 </body>
