@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas绘制矩形</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #test {
+            border: 1px solid red;
+            background-color: pink;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<canvas id="test" width="600" height="600"></canvas>
+
+<script>
+window.onload = function () {
+    var canvas = document.querySelector("#test");
+
+    if(!canvas.getContext){
+        return;
+    }
+
+    var ctx = canvas.getContext("2d");
+
+    // 不设置颜色默认为 黑色
+    ctx.fillStyle = "green";
+
+    ctx.fillRect(0, 0, 100, 100);
+
+    ctx.strokeStyle = "blue";
+
+    // 1px 重叠问题
+    ctx.strokeRect(101, 101, 100, 100);
+
+
+};
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

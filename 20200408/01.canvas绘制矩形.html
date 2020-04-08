@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas绘制矩形</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #test {
+            border: 1px solid red;
+            background-color: pink;
+        }
+
+
+    </style>
+
+</head>
+<body>
+<canvas id="test" width="600" height="600"></canvas>
+
+<script>
+window.onload = function () {
+    var canvas = document.querySelector("#test");
+    if(!canvas.getContext) {
+        return;
+    }
+
+    var ctx = canvas.getContext("2d");
+
+    /**
+     * strokeRect()
+     * fillRect()
+     * clearRect()
+     *
+     * 参数1：起始点横坐标
+     * 参数2：起始点纵坐标
+     * 参数3：矩形的宽
+     * 参数4：矩形的高
+     */
+
+    // 设置矩形描边颜色
+    ctx.strokeStyle = "green";
+
+    // 设置线宽
+    ctx.lineWidth = 10;
+
+    ctx.lineJoin =  "bevel";
+
+
+    // 使用路径 绘制一个矩形
+    ctx.strokeRect(0, 0, 200, 200);
+
+    ctx.fillStyle = "yellow";
+    ctx.fillRect(200, 200, 100, 100);
+
+    ctx.clearRect(100, 200, 40, 40);
+
+
+
+
+
+};
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

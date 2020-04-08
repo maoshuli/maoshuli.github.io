@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas</title>
+    <style>
+        canvas {
+            border: 1px red solid;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 有默认宽高-->
+<!-- 通过css设置宽高, 内容容易变形-->
+<canvas id="test" height="600" width="600">不支持的浏览器</canvas>
+
+<script>
+    /**
+     * canvas 提供画板
+     *
+     */
+    window.onload = function () {
+        var canvas = document.getElementById("test");
+        console.log(canvas);
+        console.dir(canvas);
+
+        // 检测是否支持绘制画笔
+        if(!canvas.getContext) {
+            return;
+        }
+
+
+
+
+    };
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
