@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        canvas {
+            display: block;
+            margin: 0 auto;
+            border: 1px solid red;
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="test" width="600" height="600"></canvas>
+<script>
+    window.onload = function () {
+        var canvas = document.querySelector("#test");
+
+        if(!canvas.getContext) {
+            return;
+        }
+
+        var ctx = canvas.getContext("2d");
+
+        /**
+         * 设置开始的起始点
+         *
+         * 参数1： 起始点的横坐标
+         * 参数2： 起始点的纵坐标
+         */
+        ctx.moveTo(100, 100);
+
+        /**
+         * 设置要到的点的坐标
+         *
+         * 参数1：横坐标
+         * 参数2：纵坐标
+         */
+        ctx.lineTo(100, 200);
+        ctx.lineTo(200, 200);
+        ctx.lineTo(100, 100);
+
+        ctx.lineWidth = 10;
+        ctx.strokeStyle = "yellow";
+
+        // 绘制线
+        ctx.stroke();
+
+
+        // =======
+        ctx.beginPath();
+
+        ctx.moveTo(200, 200);
+
+        /**
+         * 设置要到的点的坐标
+         *
+         * 参数1：横坐标
+         * 参数2：纵坐标
+         */
+        ctx.lineTo(200, 300);
+        ctx.lineTo(300, 300);
+        ctx.closePath();
+        // ctx.lineTo(200, 200);
+
+        ctx.lineWidth = 20;
+        ctx.strokeStyle = "green";
+
+        // 绘制线
+        ctx.stroke();
+
+
+    };
+</script>
+</body>
+</html>

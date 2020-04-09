@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>绘制矩形</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        canvas {
+            display: block;
+            margin: 50px auto;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="test" width="600" height="600"></canvas>
+<script>
+    window.onload = function () {
+        var canvas = document.querySelector("#test");
+
+        if(!canvas.getContext) {
+            return;
+        }
+
+        var ctx = canvas.getContext("2d");
+
+        // 绘制矩形
+        /**
+         * 参数1： 横坐标
+         * 参数2： 纵坐标
+         * 参数3： 宽
+         * 参数4： 高
+         */
+        ctx.rect(100, 100, 100, 200);
+        ctx.stroke();
+
+
+
+
+
+
+
+
+
+
+
+    };
+</script>
+</body>
+</html>

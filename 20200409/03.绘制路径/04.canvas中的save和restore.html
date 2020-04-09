@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>save 和 restore</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        canvas {
+            display: block;
+            margin: 50px auto;
+            border: 1px solid red;
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="test" width="600" height="600"></canvas>
+
+<script>
+    window.onload = function () {
+        var canvas = document.querySelector("#test");
+
+        if(!canvas.getContext) {
+            return;
+        }
+
+        var ctx = canvas.getContext("2d");
+
+        // 保存当前的样式
+        ctx.save();
+        ctx.strokeStyle = "red"
+        ctx.save();
+
+        ctx.strokeStyle = "yellow";
+
+        // 取出红色
+        ctx.restore();
+        ctx.strokeRect(10, 10, 100, 100);
+
+
+
+    };
+</script>
+
+</body>
+</html>

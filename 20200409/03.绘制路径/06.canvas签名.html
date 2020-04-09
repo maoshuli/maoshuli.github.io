@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas 签名</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        canvas {
+            display: block;
+            margin: 50px auto;
+            background: pink;
+            box-sizing: border-box;
+        }
+
+    </style>
+</head>
+<body>
+<h1>中文</h1>
+<canvas id="test" width="600" height="600"></canvas>
+
+<script>
+    window.onload = function () {
+        var canvas = document.querySelector("#test");
+
+        if(!canvas.getContext) {
+            return;
+        }
+
+        var ctx = canvas.getContext("2d");
+
+        canvas.addEventListener("mousedown", function (e) {
+            e = e || window.event;
+
+            console.log('e', e);
+            var x = e.clientX - canvas.offsetLeft;
+            var y = e.clientY - canvas.offsetTop;
+            console.log(x);
+            console.log(y);
+
+            ctx.moveTo(x, y);
+
+            function draw(e) {
+                e = e || window.event;
+
+                var x = e.clientX - canvas.offsetLeft;
+                var y = e.clientY - canvas.offsetTop;
+
+                ctx.save();
+                ctx.lineJoin = "round";
+                ctx.lineTo(x, y);
+                ctx.stroke();
+                ctx.restore();
+            }
+
+            document.addEventListener("mousemove", draw)
+
+            document.addEventListener("mouseup", function (e) {
+                document.onmousemove = document.onmouseup = null;
+                console.log("mouse up")
+                // ctx.beginPath();
+                document.removeEventListener("mousemove", draw);
+            })
+
+            return false;
+        })
+
+
+
+    };
+</script>
+</body>
+</html>
