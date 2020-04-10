@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        canvas {
+            display: block;
+            margin: 50px auto;
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="test" width="600" height="600"></canvas>
+
+<script>
+    // 绘制曲线
+    // canvas 中的变形
+    // 时钟
+    // 绘制图片
+    // 飞鸟
+    // canvas 绘制文本
+    // 像素操作
+
+    window.onload = function () {
+        var canvas = document.querySelector("#test");
+        if(!canvas.getContext) {
+            return;
+        }
+
+        var ctx = canvas.getContext("2d");
+
+        // 绘制一个圆形
+
+        ctx.moveTo(100, 100);
+
+        /**
+         * 参数1：开始横坐标
+         * 参数2：开始纵坐标
+         * 参数3：半径
+         * 参数4：开始的角度
+         * 参数5：结束的角度
+         * 参数6：方向，true 或 false, 默认 false 顺时针
+         */
+        ctx.lineWidth = 10;
+        ctx.arc(100, 100, 50, 0, 90*Math.PI/180, true);
+
+        ctx.stroke();
+
+
+
+
+    };
+
+
+
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

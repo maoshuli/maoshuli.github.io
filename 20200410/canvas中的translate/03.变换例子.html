@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas {
+            display: block;
+            margin: 50px auto;
+            background: pink;
+        }
+    </style>
+
+</head>
+<body>
+<canvas width="600" height="600"></canvas>
+
+<script>
+    window.onload = function () {
+        var canvas = document.querySelector("canvas");
+
+        if(!canvas.getContext) {
+            return;
+        }
+
+        var ctx = canvas.getContext("2d");
+
+        var flag = 0;
+        setInterval(function () {
+            flag += 10;
+
+
+            if(flag === 360) {
+                flag = 0;
+            }
+
+            var sFlag;
+
+            if(flag > 180) {
+                sFlag = 360 - flag;
+            } else {
+                sFlag = flag;
+            }
+
+
+            ctx.save();
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            ctx.translate(300, 300);
+            ctx.scale(sFlag/(360/2), sFlag/(360/2));
+
+            ctx.rotate(flag*Math.PI/180);
+
+            // ctx.clearRect()
+            ctx.fillRect(-100, -100, 200, 200);
+
+            ctx.restore();
+        }, 100)
+
+
+    };
+</script>
+</body>
+</html>

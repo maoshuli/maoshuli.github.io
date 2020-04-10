@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>rotate</title>
+    <style>
+        canvas {
+            display: block;
+            margin: 50px auto;
+            background: pink;
+            border: 20px solid blue;
+        }
+    </style>
+</head>
+<body>
+
+
+<canvas id="test" width="600" height="600"></canvas>
+
+<script>
+    window.onload = function () {
+        var canvas = document.querySelector("canvas");
+
+        if(!canvas.getContext) {
+            return;
+        }
+
+
+        var ctx = canvas.getContext("2d");
+
+        ctx.strokeRect(100, 100, 200, 200);
+
+        /**
+         * 旋转
+         * 旋转的是画布
+         *
+         */
+        ctx.rotate(45*Math.PI/180);
+
+
+        ctx.stroke();
+
+
+
+    };
+</script>
+</body>
+</html>

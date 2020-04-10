@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>绘制三次赛贝尔曲线</title>
+    <style>
+        canvas {
+            display: block;
+            margin: 50px auto;
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="test" width="600" height="600"></canvas>
+
+<script>
+    window.onload = function () {
+        var canvas = document.querySelector("#test");
+
+        if(!canvas.getContext) {
+            return;
+        }
+
+        var ctx = canvas.getContext("2d");
+
+        // 绘制弧形
+        ctx.moveTo(100, 200);
+
+        /**
+         * 参数1：控制点1的横坐标
+         * 参数2：控制点1的纵坐标
+         * 参数3：控制点2的横坐标
+         * 参数4：控制点2的纵坐标
+         * 参数5：结束点的横坐标
+         * 参数6：结束点的纵坐标
+         *
+         */
+        ctx.bezierCurveTo(200, 50, 250, 180, 300, 300);
+
+        ctx.stroke();
+
+    };
+</script>
+</body>
+</html>

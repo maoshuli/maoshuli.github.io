@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>translate</title>
+    <style>
+        canvas {
+            display: block;
+            margin: 50px auto;
+            background: pink;
+            border: 20px solid blue;
+        }
+    </style>
+</head>
+<body>
+
+
+<canvas id="test" width="600" height="600"></canvas>
+
+<script>
+    window.onload = function () {
+        var canvas = document.querySelector("canvas");
+
+        if(!canvas.getContext) {
+            return;
+        }
+
+
+        var ctx = canvas.getContext("2d");
+
+        ctx.save();
+        // 写多次值会累加
+        ctx.translate(100, 100);
+        ctx.translate(100, 100);
+
+        ctx.strokeStyle = "blue";
+        ctx.strokeRect(10, 10, 100, 100);
+
+        ctx.stroke();
+
+        ctx.restore();
+
+        ctx.strokeRect(10, 10, 100, 100);
+
+        ctx.stroke();
+
+
+
+    };
+</script>
+</body>
+</html>
