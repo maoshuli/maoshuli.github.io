@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>绘制图片效果</title>
+    <style>
+        canvas {
+            display: block;
+            margin: 50px auto;
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+<canvas width="600" height="600"></canvas>
+
+<script>
+    window.onload = function () {
+        var canvas = document.querySelector("canvas");
+
+        if(!canvas.getContext) {
+            return;
+        }
+
+        var ctx = canvas.getContext("2d");
+
+        var image = new Image();
+
+        image.src = "xiao.jpg";
+
+        image.onload = function () {
+
+            var pattern = ctx.createPattern(image, "repeat");
+
+            ctx.fillStyle = pattern;
+
+            // ctx.fillStyle = "red";
+            ctx.fillRect(0, 0, 600, 500);
+
+
+            // ctx.drawImage(image, 0, 0, 200, 200);
+        };
+
+
+
+    };
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

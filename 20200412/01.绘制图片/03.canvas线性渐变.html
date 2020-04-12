@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>线性渐变</title>
+    <style>
+        canvas {
+            display: block;
+            margin: 50px auto;
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+<canvas width="600" height="600"></canvas>
+
+<script>
+    window.onload = function () {
+
+        var canvas = document.querySelector("canvas");
+        if(!canvas.getContext) {
+            return;
+        }
+
+        var ctx = canvas.getContext("2d");
+
+        // 创建线性渐变对象
+        /**
+         * 开始横坐标
+         * 开始纵坐标
+         * 结束横坐标
+         * 结束纵坐标
+         */
+        var gra = ctx.createLinearGradient(10, 10, 200, 100);
+        gra.addColorStop(0, "blue");
+        gra.addColorStop(1, "red");
+
+        ctx.fillStyle = gra;
+
+        ctx.fillRect(10, 10, 300, 300);
+
+
+
+
+    };
+</script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>飞鸟</title>
+    <style>
+
+        canvas {
+            display: block;
+            margin: 50px auto;
+            background: pink;
+        }
+
+    </style>
+</head>
+<body>
+
+<canvas id="test" width="600" height="600"></canvas>
+
+<script>
+    window.onload = function () {
+
+        var canvas = document.querySelector("canvas");
+
+        if(!canvas.getContext) {
+            return;
+        }
+
+        var ctx = canvas.getContext("2d");
+
+        // 加载图片
+        var images = [];
+        var imagesLoad = 0;
+
+        function imgLoadComplete() {
+            console.log("图片全部加载");
+            // 绘制 canvas
+            // ctx.save();
+            var i = 0;
+            setInterval(function () {
+                // console.log("i", i);
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                if(i === 59) {
+                    i = 0;
+                }
+
+                ctx.drawImage(images[i], 0, 0, 400, 300);
+
+                i++;
+            }, 100)
+            // ctx.restore();
+        }
+
+        for(var i = 0; i < 60; i++) {
+            console.log("循环");
+            (function f(i) {
+
+                console.log("函数");
+                var img = new Image();
+                if(i < 10) {
+                    img.src = "./bird/bird_000" + i + ".png";
+                } else {
+                    img.src = "./bird/bird_00" + i + ".png";
+                }
+
+                img.onload = function () {
+                    images[i] = img;
+
+                    imagesLoad++;
+                    if(imagesLoad === 60) {
+                        imgLoadComplete();
+                        console.log(images)
+                    }
+                };
+            })(i);
+        }
+
+
+    };
+</script>
+</body>
+</html>

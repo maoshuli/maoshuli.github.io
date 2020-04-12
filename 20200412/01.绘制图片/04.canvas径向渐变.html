@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>径向渐变</title>
+    <style>
+        canvas {
+            display: block;
+            margin: 50px auto;
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+<canvas width="600" height="600"></canvas>
+
+<script>
+    window.onload = function () {
+
+        var canvas = document.querySelector("canvas");
+        if(!canvas.getContext) {
+            return;
+        }
+
+        var ctx = canvas.getContext("2d");
+
+        /**
+         * 参数1：第一个圆原点的横坐标
+         * 参数2：第一个圆原点的纵坐标
+         * 参数3：半径
+         * 参数4：第二个圆原点的横坐标
+         * 参数5：第二个圆原点的纵坐标
+         * 参数6：第二个圆半径
+         *
+         * @type {CanvasGradient}
+         */
+        var gra = ctx.createRadialGradient(300, 300, 100, 300, 300, 200);
+        gra.addColorStop(0, "blue");
+        gra.addColorStop(0.2, "orange");
+        gra.addColorStop(0.5, "yellow");
+        gra.addColorStop(1, "red");
+
+        ctx.fillStyle = gra;
+
+        ctx.fillRect(10, 10, 300, 300);
+
+
+    };
+</script>
+</body>
+</html>
