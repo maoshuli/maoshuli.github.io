@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas 像素操作</title>
+    <style>
+        canvas {
+            display: block;
+            margin: 50px auto;
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+
+<canvas width="400" height="200"></canvas>
+
+<script>
+    window.onload = function () {
+        var canvas = document.querySelector("canvas");
+
+        if(!canvas.getContext){
+            return;
+        }
+
+        var ctx = canvas.getContext("2d");
+
+        // 拿到整个画布的所有颜色；
+        // 然后从新绘制矩形，矩形的颜色就是修改后的颜色
+        var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+        // console.log(imageData);
+
+        for(var i = 0; i < imageData.data.length; i++) {
+            imageData.data[i*4] = 255;
+            imageData.data[i*4 + 1] = 0;
+            imageData.data[i*4 + 2] = 0;
+            imageData.data[i*4 + 3] = 255;
+        }
+
+        ctx.putImageData(imageData, 0, 0);
+
+
+    };
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

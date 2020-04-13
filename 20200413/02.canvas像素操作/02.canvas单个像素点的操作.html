@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>02.canvas单个像素点的操作.html</title>
+    <style>
+        canvas {
+            display: block;
+            margin: 50px auto;
+            background: white;
+            /*border: 1px solid red;*/
+        }
+    </style>
+</head>
+<body>
+
+<canvas width="400" height="400"></canvas>
+
+<script>
+    window.onload = function () {
+        var canvas = document.querySelector("canvas");
+
+        if(!canvas.getContext){
+            return;
+        }
+
+        var ctx = canvas.getContext("2d");
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.fillStyle = "green";
+        ctx.fillRect(100,100, 100, 100);
+        ctx.restore();
+
+        // 通过一个坐标，获取坐标像素点的颜色
+
+        // 获取像素数据集
+        var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+        var color = getPxColor(imageData, 100, 101);
+        console.log("color", color);
+
+        /**
+         * 给一个图片数据集
+         * 通过横坐标和纵坐标，获取到对应的颜色值
+         */
+        function getPxColor(imageData, x, y) {
+            console.log(imageData);
+            var index = (y - 1) * imageData.width + x;
+            for(var i = 0; i < imageData.data.length; i++) {
+                // 获取到颜色 rgba 值
+                if(index === i) {
+                    var r = imageData.data[i*4];
+                    var g = imageData.data[i*4 + 1];
+                    var b = imageData.data[i*4 + 2];
+                    var a = imageData.data[i*4 + 3];
+                }
+            }
+
+            return {
+                r,
+                g,
+                b,
+                a
+            }
+        }
+
+        function setPxColor(imageData, x, y, color) {
+            console.log("set color");
+            var width = imageData.width;
+
+            imageData.data[((y -1) * width + x) * 4] = color[0];
+            imageData.data[((y -1) * width + x) * 4 + 1] = color[1];
+            imageData.data[((y -1) * width + x) * 4 + 2] = color[2];
+            imageData.data[((y -1) * width + x) * 4 + 3] = color[3];
+        }
+
+
+        for(let x = 0; x < canvas.width; x++) {
+            setPxColor(imageData, (x), 50, [0,255,0,255])
+        }
+
+
+        var color = getPxColor(imageData, 10, 50);
+        console.log("color", color);
+
+        ctx.putImageData(imageData, 0, 0);
+
+    };
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

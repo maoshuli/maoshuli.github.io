@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>06.绘制文本阴影.html</title>
+    <style>
+        canvas {
+            display: block;
+            margin: 50px auto;
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+
+<canvas width="600" height="600"></canvas>
+
+<script>
+    window.onload = function () {
+        var canvas = document.querySelector("canvas");
+
+        if(!canvas.getContext) {
+            return ;
+        }
+
+        var ctx = canvas.getContext("2d");
+
+        // 绘制文本
+        // 文本最好有字体和大小
+        // 文本颜色
+        // var lg = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+        // lg.addColorStop(0, "red");
+        // lg.addColorStop(0.5, "yellow");
+        // lg.addColorStop(1, "blue");
+
+        ctx.shadowOffsetX = 2;
+        ctx.shadowBlur = 5;
+        ctx.shadowColor = "green";
+
+        ctx.fillStyle = "red";
+
+        ctx.font = "40px sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+
+
+        ctx.fillText("你好哦，绘制文😆", canvas.width/2, canvas.height/2);
+
+        var mt = ctx.measureText("你好哦，绘制文😆");
+        console.log(mt.width)
+
+
+
+
+    };
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

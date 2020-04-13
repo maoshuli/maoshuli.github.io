@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas绘制文本获取宽度</title>
+    <style>
+        canvas {
+            display: block;
+            margin: 50px auto;
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+
+<canvas width="600" height="600"></canvas>
+
+<script>
+    window.onload = function () {
+        var canvas = document.querySelector("canvas");
+
+        if(!canvas.getContext) {
+            return ;
+        }
+
+        var ctx = canvas.getContext("2d");
+
+        // 绘制文本
+        // 文本最好有字体和大小
+        // 文本颜色
+        var lg = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+        lg.addColorStop(0, "red");
+        lg.addColorStop(0.5, "yellow");
+        lg.addColorStop(1, "blue");
+        ctx.fillStyle = lg;
+
+        ctx.font = "40px sans-serif";
+        ctx.textAlign = "center";
+        // 文字边框
+        // ctx.strokeText("你好哦，绘制文", 100, 100);
+        ctx.strokeText("你好哦，绘制文😆", 100, 100);
+
+        ctx.textBaseline = "top";
+
+        ctx.fillText("你好哦，绘制文😆", 100, 100);
+
+        var mt = ctx.measureText("你好哦，绘制文😆");
+        console.log(mt.width)
+
+
+
+
+    };
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

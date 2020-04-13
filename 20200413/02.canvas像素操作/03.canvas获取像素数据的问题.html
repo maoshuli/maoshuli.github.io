@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>02.canvas单个像素点的操作.html</title>
+    <style>
+        canvas {
+            display: block;
+            margin: 50px auto;
+            background: white;
+            /*border: 1px solid red;*/
+        }
+    </style>
+</head>
+<body>
+
+<canvas width="400" height="400"></canvas>
+
+<script>
+    window.onload = function () {
+        var canvas = document.querySelector("canvas");
+
+        if(!canvas.getContext){
+            return;
+        }
+
+        var ctx = canvas.getContext("2d");
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.fillStyle = "green";
+        ctx.fillRect(0, 0, 100, 100);
+        ctx.restore();
+
+
+        // 获取矩形像素数据
+        var imageData = ctx.getImageData(0, 0, 100, 100);
+
+        // 替换当前像素数据中颜色
+        for(let i = 0; i < imageData.data.length; i++) {
+            imageData.data[i*4] = 0;
+            imageData.data[i*4 + 1] = 0;
+            imageData.data[i*4 + 2] = 255;
+            imageData.data[i*4 + 3] = 255;
+        }
+
+        /**
+         * 参数1：像素数据集
+         * 参数2：横坐标
+         * 参数3：纵坐标
+         */
+        ctx.putImageData(imageData, 100, 100);
+
+
+    };
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
