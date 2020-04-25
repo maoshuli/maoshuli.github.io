@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>刮刮卡</title>
+    <style>
+        canvas {
+            display: block;
+            margin: 0 auto;
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+
+<canvas width="600" height="600"></canvas>
+
+<script>
+    window.onload = function () {
+        var canvas = document.querySelector("canvas");
+
+        if(!canvas.getContext) {
+            return;
+        }
+
+        var ctx = canvas.getContext("2d");
+
+        ctx.globalAlpha = 0.5;
+
+        ctx.fillStyle = "red";
+
+        ctx.fillRect(100, 100, 200, 200);
+
+
+
+
+    };
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

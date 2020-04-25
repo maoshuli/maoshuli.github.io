@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas马赛克</title>
+    <style>
+        canvas {
+            display: block;
+            margin: 20px auto;
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+<canvas width="600" height="600"></canvas>
+
+<script>
+
+    function getPxColor(imageData, x, y) {
+        console.log(imageData);
+        var index = (y - 1) * imageData.width + x;
+        for(var i = 0; i < imageData.data.length; i++) {
+            // 获取到颜色 rgba 值
+            if(index === i) {
+                var r = imageData.data[i*4];
+                var g = imageData.data[i*4 + 1];
+                var b = imageData.data[i*4 + 2];
+                var a = imageData.data[i*4 + 3];
+            }
+        }
+
+        return {
+            r,
+            g,
+            b,
+            a
+        }
+    }
+
+    function setPxColor(imageData, x, y, color) {
+        console.log("set color");
+        var width = imageData.width;
+
+        imageData.data[((y -1) * width + x) * 4] = color[0];
+        imageData.data[((y -1) * width + x) * 4 + 1] = color[1];
+        imageData.data[((y -1) * width + x) * 4 + 2] = color[2];
+        imageData.data[((y -1) * width + x) * 4 + 3] = color[3];
+    }
+
+    window.onload = function () {
+        var canvas = document.querySelector("canvas");
+
+        if(!canvas.getContext) {
+            return;
+        }
+
+        var ctx = canvas.getContext("2d");
+
+        var image = new Image();
+
+        image.src = "./demo.jpg";
+
+        image.onload = function () {
+            canvas.width = image.width * 2;
+            canvas.height = image.height;
+
+            ctx.drawImage(image, 0, 0);
+
+            // 获取图片的像素数据
+            var oldImage = ctx.getImageData(0, 0, image.width, image.height);
+
+            // 存储完成的像素数据
+            var newImage = ctx.createImageData(image.width, image.height);
+
+
+            // 定义一个变量，定义像素快的大小
+            var size = 10;
+
+            for(var i = 0; i < oldImage.width/size; i++) {
+                for(var j = 0; j < oldImage.height/size; j++) {
+                    var point = Math.floor(Math.random() * size);
+
+                    var color = getPxColor(oldImage, point, point);
+                    console.log("color", color);
+                    setPxColor(newImage, 0, 0, color);
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.fillStyle = "rgba("+ color.r + ',' + color.g + ',' + color.b + ',' + color.a +")";
+                    ctx.fillRect(image.width/size*i, image.height/size*i, image.width/size*(i+1), image.height/size*(size+1));
+                    ctx.restore();
+                    // for(var k = 0; k < )
+
+                }
+            }
+
+
+            ctx.translate(image.width, 0);
+            ctx.putImageData(newImage, image.width, 0);
+
+        };
+
+
+    };
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

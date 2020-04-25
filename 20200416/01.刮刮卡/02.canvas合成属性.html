@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>02合成属性</title>
+    <style>
+        canvas {
+            display: block;
+            margin: 0 auto;
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+
+<canvas width="600" height="600"></canvas>
+
+<script>
+    window.onload = function () {
+        var canvas = document.querySelector("canvas");
+
+        if(!canvas.getContext) {
+            return;
+        }
+
+        var ctx = canvas.getContext("2d");
+
+        ctx.fillStyle = "red";
+        ctx.fillRect(100, 100, 100, 100);
+
+        // ctx.globalCompositeOperation = "source-out";
+        ctx.globalCompositeOperation = "destination-out";
+
+        ctx.fillStyle = "green";
+        ctx.fillRect(150, 150, 100, 100);
+
+
+
+
+
+    };
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

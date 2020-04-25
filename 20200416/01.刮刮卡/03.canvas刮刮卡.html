@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>02合成属性</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            height: 100%;
+        }
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            margin: 0 auto;
+            background: red;
+        }
+        canvas {
+            position: absolute;
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <canvas></canvas>
+    <div class="card-text">
+        未中奖
+    </div>
+</div>
+
+
+<script>
+    window.onload = function () {
+        var canvas = document.querySelector("canvas");
+
+        if(!canvas.getContext) {
+            return;
+        }
+
+        var card = document.querySelector(".card");
+
+        canvas.width = card.offsetWidth;
+        canvas.height = card.offsetHeight;
+
+
+        var ctx = canvas.getContext("2d");
+
+        ctx.fillStyle = "#f90";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.globalCompositeOperation = "destination-out";
+
+        canvas.addEventListener("touchstart", function (e) {
+            var x = e.touches[0].clientX;
+            var y = e.touches[0].clientY;
+
+            ctx.save();
+            ctx.strokeStyle = "red";
+            ctx.lineCap = "round";
+            ctx.lineWidth = 60;
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineTo(x + 1, y + 1) ;
+            ctx.stroke();
+            ctx.restore();
+        });
+
+        canvas.addEventListener("touchmove", function (e) {
+            var x = e.touches[0].clientX;
+            var y = e.touches[0].clientY;
+
+            ctx.save();
+            ctx.globalCompositeOperation = "destination-out";
+
+            ctx.strokeStyle = "red";
+            ctx.lineCap = "round";
+            ctx.lineWidth = 60;
+            ctx.beginPath();
+            ctx.lineTo(x, y);
+            ctx.stroke();
+            ctx.restore();
+        })
+
+        canvas.addEventListener("touchend", function () {
+
+        })
+
+
+
+    };
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

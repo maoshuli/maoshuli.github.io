@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>像素画</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        canvas {
+            display: block;
+            margin: 0 auto;
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+
+<canvas></canvas>
+
+<script>
+
+    function getPxColor(imageData, x, y) {
+        var resultColor = [];
+
+        var width = imageData.width;
+
+        var data = imageData.data;
+
+        var index = (y * width) + x;
+
+        resultColor[0] = data[index * 4];
+        resultColor[1] = data[index * 4 + 1];
+        resultColor[2] = data[index * 4 + 2];
+        resultColor[3] = data[index * 4 + 3];
+
+        return resultColor;
+    }
+
+    function setPxColor(imageData, x, y, newColor) {
+        var width = imageData.width;
+
+        var data = imageData.data;
+
+        var index = (y * width) + x;
+
+        data[index * 4] = newColor[0];
+        data[index * 4 + 1] = newColor[1];
+        data[index * 4 + 2] = newColor[2];
+        data[index * 4 + 3] = newColor[3];
+    }
+
+    /**
+     * 还有的优化空间：
+     * 1.每次刷新颜色取点是随机的，所以每次渲染结果会有不同，像素快越大刷新后越明显
+     * 解决：改成取像素方位内随机颜色值更好，但是消耗计算性能会增加
+     * 2. 图片右下侧边缘未进行随机取点，边缘没有显示填充
+     * 解决：循环条件范围修改，针对最后不足像素块大小范围做特殊处理
+     */
+    window.onload = function () {
+        var canvas = document.querySelector("canvas");
+
+        if(!canvas.getContext) {
+            return;
+        }
+
+        var ctx = canvas.getContext("2d");
+
+        var image = new Image();
+
+        image.src = "./demo.jpg";
+
+        image.onload = function () {
+            var width = image.width;
+            var height = image.height;
+
+            canvas.width = width * 2;
+            canvas.height = height;
+
+            console.log("width", image.width);
+            console.log("height", image.height);
+
+            ctx.drawImage(image, 0, 0);
+
+            var oldImageData = ctx.getImageData(0, 0, width, height);
+
+            // 马赛克像素大小
+            var pxBox = 10;
+
+            // // 循环旧的数据
+            for(var i = 1; i < oldImageData.width/pxBox; i++) {
+                for(var j = 1; j < oldImageData.height/pxBox; j++) {
+                    var x = (pxBox * (i - 1)) + Math.floor(Math.random() * pxBox);
+                    var y = (pxBox * (j - 1)) + Math.floor(Math.random() * pxBox);
+                    var resultColor = getPxColor(oldImageData, x, y);
+                    var rgba = "rgba("+resultColor[0]+ "," + resultColor[1] + "," + resultColor[2] + "," + resultColor[3] +")";
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.fillStyle = rgba;
+                    ctx.translate(width, 0);
+                    ctx.fillRect(pxBox * (i - 1), pxBox * (j - 1), pxBox, pxBox);
+                    ctx.restore();
+                }
+            }
+        };
+    };
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
