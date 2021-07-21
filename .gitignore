@@ -10,6 +10,7 @@ node_modules/
 
 # Log file
 *.log
+*.log2
 
 # BlueJ files
 *.ctxt
