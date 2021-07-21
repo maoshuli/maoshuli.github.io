@@ -11,6 +11,7 @@ node_modules/
 # Log file
 *.log
 *.log2
+*.log3
 
 # BlueJ files
 *.ctxt
